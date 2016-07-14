@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="UTF-8">
+  <title>Crystal Ball Predictor</title>
+
+    <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <style type="text/css">
+  
+    .ballImage {
+      width: 250px;
+      height: 200px;
+    }
+    body{
+      background-image: url(images/hands_crystalBall.jpg);
+      background-size: cover;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Crystal Ball HTML pulling Jumbotron CSS -->
+  <div class="container">
+    
+    <div class="jumbotron" style="background-color: #571B7E; color: #F0F8FF;">
+
+      <div class="container">
+
+        <h1 class="text-center"><strong>Crystal Ball Predictor</strong></h1>
+
+      </div>
+
+    </div>
+
+        <!-- Numbers & Images Layout HTML-->
+    <div class="row"></div>
+
+
+          <!-- Target Number -->
+      <div class="col-lg-6">
+        
+        <div class="panel label-info">
+
+          <section class="panel-heading">
+
+            <h3 class="panel-title text-center" style="background-color: white; color: black;">Can You Guess the Magic Number?</h3> 
+
+          </section>
+
+          <section class="panel-body text-center" id="randnumber" style="font-size: 24px; font-weight: 500";>
+            
+          </section>
+
+        </div>
+
+      </div>
+
+      <!-- Players Number -->
+      <div class="col-lg-6">
+        
+        <div class="panel label-info">
+          <div class="panel-heading">
+            <h3 class="panel-title text-center" style="background-color: white; color: black;">Your Number</h3>
+          </div>
+          <div class="panel-body">
+            <h3 class="text-center" id="yourNumber" style="font-size: 24px; font-weight: 500";></h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Crystal Ball Row -->
+    <div class="row">   
+
+      <div class="col-lg-12">
+
+        <div class="panel label-info">
+
+          <div class="panel-heading">
+
+            <h3 class="panel-title text-center" style="background-color: white; color: black;">Careful Selections Will Make You A WINNER!</h3>
+
+          </div>
+
+          <div class="panel-body text-center">
+
+            <img class="ballImage" src="images/pinkLarge.jpg" alt="" id="pink">
+
+            <img class="ballImage" src="images/sunsetLarge2.jpg" alt="" id="orange">
+
+            <img class="ballImage" src="images/purpleLarge.jpg" alt="" id="purple">
+
+            <img class="ballImage" src="images/sunsetLarge.jpg" alt="" id="sun">
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Counters Row -->
+    <div class="row">
+      
+      <!-- Win Count -->
+      <div class="col-lg-6">        
+        <div class="panel label-info">
+          <div class="panel-heading">
+            <h3 class="panel-title text-center" style="background-color: white; color: black;">WINS</h3>
+          </div>
+          <div class="panel-body">
+            <h3 class="text-center" id="winCounter">0</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loss Count -->
+      <div class="col-lg-6">
+        
+        <div class="panel label-info">
+          <div class="panel-heading">
+            <h3 class="panel-title text-center" style="background-color: white; color: black;">LOSSES</h3>
+          </div>
+          <div class="panel-body" style=" background-color: transparent 70%; ">
+            <h3 class="text-center" id="lossCounter">0</h3>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+      
+
+<!-- jQuery Functionality -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">
+
+  $( document ).ready(function() {
+
+    var numberToGuess = 53;
+
+    var counter = 0;
+
+    var numbers = [10, 5, 3, 7];
+
+    function shuffle(a) {
+        var j, x, i;
+        for (i = a.length; i; i--) {
+            j = Math.floor(Math.random() * i);
+            x = a[i - 1];
+            a[i - 1] = a[j];
+            a[j] = x;
+        }
+    }   
+
+    shuffle(numbers);
+    console.log(numbers);
+
+    $('#randnumber').text(numberToGuess);
+
+    for (var i=0; i< numbers.length; i++){
+
+      var imageCrystal = $('<img>');
+
+      imageCrystal.attr('data-num', numbers[i]);
+
+      imageCrystal.attr('src', 'images/pinkLarge.jpg', 'images/sunsetLarge2.jpg', 'images/purpleLarge.jpg', 'images/sunsetLarge.jpg');
+
+      imageCrystal.attr('alt', 'balls');
+
+      imageCrystal.addClass('ballImage');
+
+      $('#balls').append(imageCrystal);
+    }
+
+    $('.ballImage').on('click', function(){
+      counter = counter + parseInt($(this).data('num'));
+
+      $('#playerNumber').text(counter);
+
+      if (counter == numberToGuess){
+        alert("YAY...You won!!!!");
+      }else if( counter > numberToGuess){
+        alert("Sorry...You lost!");
+      }
+    });
+
+  });
+</script>
+</body>
+</html>
